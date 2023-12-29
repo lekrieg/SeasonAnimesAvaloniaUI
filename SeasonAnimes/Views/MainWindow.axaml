@@ -1,0 +1,94 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:SeasonAnimes.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SeasonAnimes.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="SeasonAnimes"
+        WindowStartupLocation="CenterScreen"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="True">
+    
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.65"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top"
+                        Margin="15">
+                <RelativePanel HorizontalAlignment="Center">
+                    <ComboBox x:Name="SeasonComboBox"
+                              Margin="10 0"
+                              SelectedIndex="{Binding SeasonIndex}"
+                              MaxDropDownHeight="100">
+                        <ComboBoxItem>Winter</ComboBoxItem>
+                        <ComboBoxItem>Spring</ComboBoxItem>
+                        <ComboBoxItem>Summer</ComboBoxItem>
+                        <ComboBoxItem>Fall</ComboBoxItem>
+                    </ComboBox>
+                
+                    <TextBox Name="YearTextBox"
+                             RelativePanel.RightOf="SeasonComboBox"
+                             AcceptsReturn="False"
+                             TextAlignment="Center"
+                             Watermark="Enter a year"
+                             Text="{Binding YearText}"/>
+                    <ProgressBar RelativePanel.Below="YearTextBox" IsIndeterminate="True" IsVisible="{Binding IsBusy}"/>
+                
+                    <Button Name="SearchButton"
+                            Margin="10 0"
+                            RelativePanel.RightOf="YearTextBox"
+                            Command="{Binding SearchCommand}">
+                        <PathIcon Data="{StaticResource search_square_regular}"/>
+                    </Button>
+                </RelativePanel>
+            </StackPanel>
+        
+            <Grid Margin="5"
+                  ColumnDefinitions="*"
+                  RowDefinitions="5*, *"
+                  HorizontalAlignment="Center">
+                <ListBox Name="ListBoxStuff"
+                         Grid.Row="0"
+                         ItemsSource="{Binding SearchResults}"
+                         SelectedItem="{Binding SelectedAnime}"
+                         Margin="0 10">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                    
+                <StackPanel Name="BottomButtons"
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                    <Button IsEnabled="{Binding IsButtonActive}"
+                            Command="{Binding LeftCommand}">
+                        <PathIcon Data="{StaticResource arrow_left_regular}"/>
+                    </Button>
+                    <Button Command="{Binding RightCommand}">
+                        <PathIcon Data="{StaticResource arrow_right_regular}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </DockPanel> 
+    </Panel>
+        
+</Window>

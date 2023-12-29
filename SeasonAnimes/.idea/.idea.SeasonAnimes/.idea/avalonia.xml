@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="App.axaml" value="SeasonAnimes.csproj" />
+        <entry key="Styles/Icons.axaml" value="SeasonAnimes.csproj" />
+        <entry key="Views/AnimeInfoWindow.axaml" value="SeasonAnimes.csproj" />
+        <entry key="Views/AnimeListingView.axaml" value="SeasonAnimes.csproj" />
+        <entry key="Views/AnimeView.axaml" value="SeasonAnimes.csproj" />
+        <entry key="Views/MainWindow.axaml" value="SeasonAnimes.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
